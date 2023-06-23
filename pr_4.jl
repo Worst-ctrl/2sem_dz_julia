@@ -11,6 +11,7 @@ function  reverse_gauss(A::AbstractMatrix{T}, b::AbstractVector{T}) where T
 end
 
 #5 приведение матрицы к ступенчатому ввиду
+
 function transform_to_steps!(A::AbstractMatrix; epsilon = 1e-7)
     @inbounds for k ∈ 1:size(A, 1)
     absval, Δk = findmax(abs, @view(A[k:end,k]))
@@ -22,4 +23,12 @@ function transform_to_steps!(A::AbstractMatrix; epsilon = 1e-7)
     end
         end
     return A
+end
+
+#6 - решение слау
+
+function solve_sla(A::AbstractMatrix{T}, b::AbstractVector{T}) where T
+    Ab = [A b]
+    transform_to_steps!(Ab; epsilon = 10sqrt(eps(T)) maximum(abs,A))
+    return reverse_gauss(A, b)
 end
