@@ -12,6 +12,3 @@ function isnarcissistic(n::Integer)
     end
 end
 
-for j in 10:1:-1
-    print(j)
-end
