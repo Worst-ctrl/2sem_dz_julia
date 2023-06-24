@@ -1,3 +1,16 @@
+# 1 
+function taylor_exp(x, n)
+    result = 1.0  # Инициализируем переменную для хранения суммы ряда
+    term = 1.0  # Инициализируем переменную для текущего члена ряда
+
+    for i in 1:n  # Цикл от 0 до n
+        term *= x / i  # Вычисляем следующий член ряда
+        result += term  # Добавляем текущий член ряда к сумме
+    end
+    return result  # Возвращаем сумму ряда
+end
+
+
 #4 обратный ход алгоритма Жордана-Гаусса
 using LinearAlgebra
 
@@ -32,3 +45,15 @@ function solve_sla(A::AbstractMatrix{T}, b::AbstractVector{T}) where T
     transform_to_steps!(Ab; epsilon = 10sqrt(eps(T)) maximum(abs,A))
     return reverse_gauss(A, b)
 end
+
+#8. Написать функцию, возвращающую ранг произвольной прямоугольной матрицы (реализуется на базе приведения матрицы к ступенчатому виду).
+function rank!(matrix::AbstractMatrix{Float64})
+    transform_to_steps!(Matrix)
+      epsilon = 1e-8
+      i = 1
+    while abs(matrix[i,i]) > epsilon
+        i+=1
+    end
+    return i-1
+  end
+  
