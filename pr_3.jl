@@ -56,10 +56,10 @@ end
 
 #4
 
-function meanstd(aaa)
-    T = eltype(aaa)
+function meanstd(x)
+    T = eltype(x)
     n = 0; s¹ = zero(T); s² = zero(T)
-    for a in aaa
+    for a in x
         n += 1; s¹ .+= a; s² += a*a
     end
     mean = s¹ ./ n

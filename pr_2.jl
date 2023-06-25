@@ -16,17 +16,33 @@ end
 # k == 0 => t = a^n
 
 "2. На база этой функции написать другую функцию, возвращающую n-ый член последовательности Фибоначчи (сложность - O(log n))."
-#https://e-maxx.ru/algo/fibonacci_numbers
-function fibonachi(n::Int)
+
+function fibonachi(n)
     return power([0 1; 1 1], n)
 end
 
 "3. Написать функцию, вычисляющую с заданной точностью log_a x (при произвольном a, не обязательно, что a>1), методом рассмотренном на лекции 
 (описание этого метода можно найти также в книке Борисенко Основы программирования - она выложена в нашей группе в телеграм)."
-   
+
+function log_(a, x) # a - основание логарифма, x - число под логарифмом
+    z=x; t=1; y=0
+    #ИНВАРИАНТ:  x = z^t * a^y
+    while z < 1/a || z > a || t > ε 
+        if z < 1/a
+            z *= a 
+            y -= t
+        elseif z > a
+            z /= a
+            y += t 
+        elseif t > ε
+            t /= 2 
+            z *= z 
+        end
+    end
+end
 "4. Написать функцию, реализующую приближенное решение уравнения вида f(x)=0 методом деления отрезка пополам (описание метода см. ниже). "
 
-function bisection(func, bounds, eps = 1e - 4) #bounds - отрезок, в пределах кот лежит корень
+function bisection(func::Function, bounds, eps = 1e - 4) #bounds - отрезок, в пределах кот лежит корень, func - функция
     a, b = bounds
     if func(a) * func(b) > 0:
         return nothing
@@ -36,9 +52,8 @@ function bisection(func, bounds, eps = 1e - 4) #bounds - отрезок, в пр
         if func(a) * func(x0) > 0:
             a = x0 #тк корня на отрезке [a, x0] нет, сдвигаем точку a правее
         else b = x0
-end
+        end
         return x0
     end
 end
 
-bisection()
