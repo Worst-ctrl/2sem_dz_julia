@@ -10,7 +10,7 @@ function power(a::T, n::Int) where T
             k -= 1 # - преобразование, направленное в сторону завершеня цикла,
             t = t * p # тогда следующее преобразование следует из инварианта
         end
-    end
+end
     return p
 end
 # k == 0 => t = a^n
@@ -30,13 +30,13 @@ function bisection(func, bounds, eps = 1e - 4) #bounds - отрезок, в пр
     a, b = bounds
     if func(a) * func(b) > 0:
         return nothing
-    end
+        end
     x0 = (a + b) / 2
     while abs(a - b) >= eps
         if func(a) * func(x0) > 0:
             a = x0 #тк корня на отрезке [a, x0] нет, сдвигаем точку a правее
         else b = x0
-        end
+end
         return x0
     end
 end
