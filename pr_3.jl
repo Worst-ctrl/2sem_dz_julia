@@ -11,7 +11,7 @@ end
 
 #print(isprime(7))
 
-#2
+#2 - Решето Эратосфена
 function eratosphenes_sieve(n::Integer)
     prime_indexes = ones(Bool, n)
     prime_indexes[begin] = false
@@ -31,7 +31,7 @@ function eratosphenes_sieve(n::Integer)
     return findall(prime_indexes)
 end
 
-#3
+#3 - факторизация числа
 
 function factorize(n::IntType) where IntType <: Integer
     list = NamedTuple{(:div, :deg), Tuple{IntType, IntType}}[]
